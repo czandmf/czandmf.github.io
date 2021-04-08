@@ -124,6 +124,7 @@ var app = new Vue({
 					this.va3 = "";
 				}
 			}
+			this.select2 = ""; // 仅供测试
 		},
 		select_lv_change: function() {
 			if (this.select_lv == 1) {
@@ -140,6 +141,10 @@ var app = new Vue({
 			this.select_ap = this.ap_list[0].value;
 		},
 		count: function() {
+			if (this.select1 != 1 && this.select2 == "") {
+				alert("请选择装备品质");
+				return;
+			}
 			if (this.select1 == 1) {
 				this.n = 26; // 学徒级
 			} else if (this.select1 == 2) {
