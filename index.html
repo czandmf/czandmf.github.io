@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport"
+			content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>魔法伤害计算器</title>
+		<link href="./lib/theme-chalk/index.css" rel="stylesheet">
+		<link href="./css/index.css" rel="stylesheet">
+		<script src="./js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./lib/index.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<div class="app-title">
+				魔法伤害计算器 V1.0
+			</div>
+			<div class="item item1">
+				<el-row :gutter="3">
+					<el-col :span="3">
+						<div class="item-title">装备</div>
+					</el-col>
+					<el-col :span="14">
+						<el-select class="select1" v-model="select1" size="mini">
+							<el-option label="学徒级符文石" :value="1"></el-option>
+							<el-option label="入门级符文石" :value="2"></el-option>
+							<el-option label="大师级符文石" :value="3"></el-option>
+							<el-option label="博学者级符文石" :value="2"></el-option>
+						</el-select>
+					</el-col>
+					<el-col :span="7">
+						<el-select class="select2" v-model="select2" size="mini">
+							<el-option label="普通" :value="1"></el-option>
+							<el-option label="精良" :value="2"></el-option>
+							<el-option label="史诗" :value="3"></el-option>
+							<el-option label="传说" :value="4"></el-option>
+						</el-select>
+					</el-col>
+				</el-row>
+			</div>
+			
+			<div class="item item2">
+				<el-row :gutter="3">
+					<el-col :span="3">
+						<div class="item-title">属性</div>
+					</el-col>
+					<el-col :span="7">
+						<el-input placeholder="请输入内容" v-model="value3" size="mini">
+							<el-select v-model="value3" slot="prepend" size="mini">
+								<el-option label="水" value="1"></el-option>
+								<el-option label="火" value="2"></el-option>
+								<el-option label="土" value="3"></el-option>
+								<el-option label="雷" value="3"></el-option>
+								<el-option label="风" value="3"></el-option>
+							</el-select>
+						</el-input>
+					</el-col>
+					<el-col :span="7">
+						<el-input placeholder="请输入内容" v-model="value3" size="mini">
+							<el-select v-model="value3" slot="prepend" size="mini">
+								<el-option label="水" value="1"></el-option>
+								<el-option label="火" value="2"></el-option>
+								<el-option label="土" value="3"></el-option>
+								<el-option label="雷" value="3"></el-option>
+								<el-option label="风" value="3"></el-option>
+							</el-select>
+						</el-input>
+					</el-col>
+					<el-col :span="7">
+						<el-input placeholder="请输入内容" v-model="value3" size="mini">
+							<el-select v-model="value3" slot="prepend" size="mini">
+								<el-option label="水" value="1"></el-option>
+								<el-option label="火" value="2"></el-option>
+								<el-option label="土" value="3"></el-option>
+								<el-option label="雷" value="3"></el-option>
+								<el-option label="风" value="3"></el-option>
+							</el-select>
+						</el-input>
+					</el-col>
+				</el-row>
+			</div>
+			
+			<div class="item item3">
+				<el-row :gutter="3">
+					<el-col :span="3">
+						<div class="item-title">魔法</div>
+					</el-col>
+					<el-col :span="7">
+						<el-select class="select1" v-model="value1" placeholder="请选择" size="mini">
+							<el-option label="一级魔法" :value="1"></el-option>
+							<el-option label="二级魔法" :value="2"></el-option>
+							<el-option label="三级魔法" :value="3"></el-option>
+							<el-option label="四级魔法" :value="2"></el-option>
+							<el-option label="卷轴魔法" :value="2"></el-option>
+						</el-select>
+					</el-col>
+					<el-col :span="14">
+						<el-select class="select2" v-model="value2" placeholder="请选择" size="mini">
+							<el-option label="普通" :value="1"></el-option>
+							<el-option label="精良" :value="2"></el-option>
+							<el-option label="史诗" :value="3"></el-option>
+							<el-option label="传说" :value="4"></el-option>
+						</el-select>
+					</el-col>
+				</el-row>
+			</div>
+			
+			<div class="item item4">
+				<el-row :gutter="3">
+					<el-col :span="3">
+						<div class="item-title">公式</div>
+					</el-col>
+					<el-col :span="21">
+						<div class="item-content">
+							AP=m+[n*a%]+[x*b%]+[y*c%]+[z*d%]
+						</div>
+					</el-col>
+				</el-row>
+			</div>
+			
+			<div class="item item5">
+				<el-row :gutter="3">
+					<el-col :span="24">
+						<el-button type="primary" size="mini" round>计算魔法伤害</el-button>
+					</el-col>
+				</el-row>
+			</div>
+			
+			<div class="item item6">
+				<el-row :gutter="3">
+					<el-col :span="3">
+						<div class="item-title">PVE</div>
+					</el-col>
+					<el-col :span="21">
+						<div class="item-content">
+							202（对野怪伤害）
+						</div>
+					</el-col>
+				</el-row>
+			</div>
+			
+			<div class="item item7">
+				<el-row :gutter="3">
+					<el-col :span="3">
+						<div class="item-title">PVP</div>
+					</el-col>
+					<el-col :span="21">
+						<div class="item-content">
+							141（对玩家伤害）
+						</div>
+					</el-col>
+				</el-row>
+			</div>
+		</div>
+		<script src="./js/index.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>
