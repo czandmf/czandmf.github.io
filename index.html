@@ -25,16 +25,25 @@
 						<el-select v-model="select1" size="mini" @change="select1_change">
 							<el-option label="学徒级符文石" :value="1"></el-option>
 							<el-option label="入门级符文石" :value="2"></el-option>
-							<el-option label="大师级符文石" :value="3"></el-option>
-							<el-option label="博学者级符文石" :value="4"></el-option>
+							<el-option label="专家级符文石" :value="3"></el-option>
+							<el-option label="大师级符文石" :value="4"></el-option>
+							<el-option label="博学者级符文石" :value="5"></el-option>
 						</el-select>
 					</el-col>
 					<el-col :span="7">
-						<el-select v-model="select2" size="mini" :disabled="select1==1">
-							<el-option label="普通" :value="1" :disabled="select1!=1"></el-option>
-							<el-option label="精良" :value="2"></el-option>
-							<el-option label="史诗" :value="3"></el-option>
-							<el-option label="传说" :value="4"></el-option>
+						<el-select v-model="select2" size="mini" :disabled="select1==1" placeholder="">
+							<el-option label="普通" :value="1" :disabled="select1!=2">
+								<span style="color: limegreen;">普通</span>
+							</el-option>
+							<el-option label="精良" :value="2" :disabled="select1==3 || select1==4">
+								<span style="color: royalblue;">精良</span>
+							</el-option>
+							<el-option label="史诗" :value="3" :disabled="select1==2">
+								<span style="color: darkviolet;">史诗</span>
+							</el-option>
+							<el-option label="传说" :value="4" :disabled="select1==2">
+								<span style="color: darkorange;">传说</span>
+							</el-option>
 						</el-select>
 					</el-col>
 				</el-row>
@@ -67,7 +76,7 @@
 						</el-input>
 					</el-col>
 					<el-col :span="7">
-						<el-input v-model="va3" size="mini" type="number" :disabled="select1!=4">
+						<el-input v-model="va3" size="mini" type="number" :disabled="select1!=5">
 							<el-select v-model="ap3" slot="prepend" size="mini" placeholder="" :disabled="select1!=4">
 								<el-option label="水" value="s" :disabled="ap1==1||ap2==1"></el-option>
 								<el-option label="火" value="h" :disabled="ap1==2||ap2==2"></el-option>
@@ -85,16 +94,16 @@
 						<div class="item-title">魔法</div>
 					</el-col>
 					<el-col :span="7">
-						<el-select v-model="select_lv" placeholder="请选择" size="mini" @change="select_lv_change">
+						<el-select v-model="select_lv" size="mini" @change="select_lv_change">
 							<el-option label="一级魔法" value="1"></el-option>
 							<el-option label="二级魔法" value="2"></el-option>
 							<el-option label="三级魔法" value="3"></el-option>
-							<el-option label="四级魔法" value="4"></el-option>
+							<el-option label="四级魔法" value="4" disabled></el-option>
 							<el-option label="卷轴魔法" value="5"></el-option>
 						</el-select>
 					</el-col>
 					<el-col :span="14">
-						<el-select v-model="select_ap" placeholder="请选择" size="mini">
+						<el-select v-model="select_ap" size="mini">
 							<el-option v-for="item in ap_list" :key="item.value" :label="item.label" :value="item.value">
 							</el-option>
 						</el-select>
@@ -128,7 +137,7 @@
 			<div class="item item-btn">
 				<el-row :gutter="3">
 					<el-col :span="24">
-						<el-button type="primary" size="mini" round @click="count">计算魔法伤害</el-button>
+						<el-button type="success" size="mini" round @click="count">计算魔法伤害</el-button>
 					</el-col>
 				</el-row>
 			</div>
@@ -155,6 +164,15 @@
 						</div>
 					</el-col>
 				</el-row>
+			</div>
+			<div class="item item-init" v-show="pve+pvp!=0">
+				测试版计算结果仅供参考
+			</div>
+			<div class="item item-init" v-show="pve+pvp!=0">
+				如果有误请联系黑白反馈
+			</div>
+			<div class="item item-init" v-show="pve+pvp!=0">
+				QQ 2665006659
 			</div>
 			<div class="item item-bottom">
 				应用宝 130-256 黑白 V1.0 2021-04-08
