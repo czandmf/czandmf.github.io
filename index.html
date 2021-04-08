@@ -32,16 +32,16 @@
 					</el-col>
 					<el-col :span="7">
 						<el-select v-model="select2" size="mini" :disabled="select1==1" placeholder="">
-							<el-option label="普通" :value="1" :disabled="select1!=2">
+							<el-option label="普通" :value="1" v-show="select1==2">
 								<span style="color: limegreen;">普通</span>
 							</el-option>
-							<el-option label="精良" :value="2" :disabled="select1==3 || select1==4">
+							<el-option label="精良" :value="2" v-show="select1!=3 && select1!=4">
 								<span style="color: royalblue;">精良</span>
 							</el-option>
-							<el-option label="史诗" :value="3" :disabled="select1==2">
+							<el-option label="史诗" :value="3" v-show="select1!=2">
 								<span style="color: darkviolet;">史诗</span>
 							</el-option>
-							<el-option label="传说" :value="4" :disabled="select1==2">
+							<el-option label="传说" :value="4" v-show="select1!=2">
 								<span style="color: darkorange;">传说</span>
 							</el-option>
 						</el-select>
