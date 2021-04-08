@@ -54,8 +54,8 @@ var app = new Vue({
 		f: 0,
 		l: 0,
 		t: 0,
-		pve: "100",
-		pvp: "70"
+		pve: "0",
+		pvp: "0"
 	},
 	methods: {
 		select1_change: function() {
@@ -138,7 +138,6 @@ var app = new Vue({
 			str = str.replace(/t/g, this.t || 0);
 			str = str.replace(/\[/g, "Math.floor(");
 			str = str.replace(/\]/g, ")");
-			console.log(str);
 			this.pve = eval(str);
 			this.pvp = Math.floor(this.pve * 0.7);
 		}
