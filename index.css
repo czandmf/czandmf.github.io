@@ -52,18 +52,25 @@
 	padding: 0;
 }
 
-.item4 .item-content {
+.item4 .item-content,
+.item5 .item-content {
 	text-align: center;
 	font-size: 12px;
 	font-style: italic;
 	color: #409EFF;
 }
 
-.item5 .el-col {
+.item-btn .el-col {
 	text-align: center;
 }
 
-.item8 {
+.item-pve .item-content span,
+.item-pvp .item-content span {
+	color: #f00;
+	font-weight: 900;
+}
+
+.item-bottom {
 	position: absolute;
 	bottom: 0;
 	text-align: center;
