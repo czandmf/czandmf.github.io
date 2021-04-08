@@ -70,6 +70,15 @@
 	font-weight: 900;
 }
 
+.item-init {
+	text-align: center;
+	font-size: 12px;
+	height: 20px;
+	line-height: 20px;
+	margin-top: 0px;
+	color: #303133;
+}
+
 .item-bottom {
 	position: absolute;
 	bottom: 0;
