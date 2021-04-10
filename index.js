@@ -1,14 +1,14 @@
 var app = new Vue({
 	el: "#app",
 	data: {
-		select1: 1, // 符文石
-		select2: "", // 品质
+		select1: 1,
+		select2: "",
 		ap1: "s",
-		va1: "",
+		va1: "0",
 		ap2: "",
-		va2: "",
+		va2: "0",
 		ap3: "",
-		va3: "",
+		va3: "0",
 		select_lv: "1",
 		select_ap: "",
 		ap_list: [],
@@ -94,21 +94,22 @@ var app = new Vue({
 		l: 0,
 		t: 0,
 		pve: "0",
-		pvp: "0"
+		pvp: "0",
+		count_str: ""
 	},
 	methods: {
 		select1_change: function() {
 			this.ap1 = "s";
-			this.va1 = "";
+			this.va1 = "0";
 			if (this.select1 == 1) {
 				this.select2 = "";
 				this.ap2 = "";
-				this.va2 = "";
+				this.va2 = "0";
 				this.ap3 = "";
-				this.va3 = "";
+				this.va3 = "0";
 			} else {
 				this.ap2 = "h";
-				this.va2 = "";
+				this.va2 = "0";
 				if (this.select1 == 2) {
 					if (this.select2 != 1 || this.select2 != 2 || this.select2 != 3) {
 						this.select2 = 1;
@@ -118,13 +119,12 @@ var app = new Vue({
 				}
 				if (this.select1 == 5) {
 					this.ap3 = "f";
-					this.va3 = "";
+					this.va3 = "0";
 				} else {
 					this.ap3 = "";
-					this.va3 = "";
+					this.va3 = "0";
 				}
 			}
-			this.select2 = ""; // 仅供测试
 		},
 		select_lv_change: function() {
 			if (this.select_lv == 1) {
@@ -141,10 +141,6 @@ var app = new Vue({
 			this.select_ap = this.ap_list[0].value;
 		},
 		count: function() {
-			if (this.select1 != 1 && this.select2 == "") {
-				alert("请选择装备品质");
-				return;
-			}
 			if (this.select1 == 1) {
 				this.n = 26; // 学徒级
 			} else if (this.select1 == 2) {
@@ -154,10 +150,12 @@ var app = new Vue({
 					this.n = 38; // 精良 入门
 				} else if (this.select2 == 3) {
 					this.n = 1; // 史诗 入门
+					return;
 				}
 			} else if (this.select1 == 3) {
 				if (this.select2 == 2) {
 					this.n = 1; // 精良 专家
+					return;
 				} else if (this.select2 == 3) {
 					this.n = 50; // 史诗 专家
 				} else if (this.select2 == 4) {
@@ -166,6 +164,7 @@ var app = new Vue({
 			} else if (this.select1 == 4) {
 				if (this.select2 == 2) {
 					this.n = 1; // 精良 大师
+					return;
 				} else if (this.select2 == 3) {
 					this.n = 58; // 史诗 大师
 				} else if (this.select2 == 4) {
@@ -185,9 +184,9 @@ var app = new Vue({
 			this.f = 0;
 			this.l = 0;
 			this.t = 0;
-			this[this.ap1] = this.va1;
-			this[this.ap2] = this.va2;
-			this[this.ap3] = this.va3;
+			this[this.ap1] = this.va1 * 1;
+			this[this.ap2] = this.va2 * 1;
+			this[this.ap3] = this.va3 * 1;
 			var str = this.select_ap;
 			str = str.replace(/n/g, this.n || 0);
 			str = str.replace(/s/g, this.s || 0);
