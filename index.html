@@ -14,7 +14,7 @@
 	<body>
 		<div id="app">
 			<div class="app-title">
-				<marquee scrollamount="5">测试版本 计算结果仅供参考 如有错误请联系QQ 2665006659 或游戏内私聊 天青色等烟雨（仅限130-256）</marquee>
+				<marquee scrollamount="4">计算结果仅供参考 如有错误请发送邮件至2665006659@qq.com</marquee>
 			</div>
 			<div class="item item1">
 				<el-row :gutter="3">
@@ -35,10 +35,10 @@
 							<el-option label="普通" :value="1" v-show="select1==2">
 								<span style="color: limegreen;">普通</span>
 							</el-option>
-							<el-option label="精良" :value="2" v-show="select1!=3 && select1!=4">
+							<el-option label="精良" :value="2">
 								<span style="color: royalblue;">精良</span>
 							</el-option>
-							<el-option label="史诗" :value="3" v-show="select1!=2">
+							<el-option label="史诗" :value="3">
 								<span style="color: darkviolet;">史诗</span>
 							</el-option>
 							<el-option label="传说" :value="4" v-show="select1!=2">
@@ -48,6 +48,9 @@
 					</el-col>
 				</el-row>
 			</div>
+			<div class="item item-info" v-show="select1==2&&select2==3 || select1==4&&select2==2 || select1==5&&select2==2">
+				<i class="el-icon-error"></i> 缺少此品质的符文石数据，请选择其它品质
+			</div>
 			<div class="item item2">
 				<el-row :gutter="3">
 					<el-col :span="3">
@@ -55,34 +58,34 @@
 					</el-col>
 					<el-col :span="7">
 						<el-input v-model="va1" size="mini" type="number">
-							<el-select v-model="ap1" slot="prepend" size="mini" placeholder="">
-								<el-option label="水" value="s" :disabled="ap2==1||ap3==1"></el-option>
-								<el-option label="火" value="h" :disabled="ap2==2||ap3==2"></el-option>
-								<el-option label="风" value="f" :disabled="ap2==3||ap3==3"></el-option>
-								<el-option label="雷" value="l" :disabled="ap2==4||ap3==4"></el-option>
-								<el-option label="土" value="t" :disabled="ap2==5||ap3==5"></el-option>
+							<el-select v-model="ap1" slot="prepend" size="mini" placeholder="" min="0" max="99">
+								<el-option label="水" value="s" :disabled="ap2=='s'||ap3=='s'"></el-option>
+								<el-option label="火" value="h" :disabled="ap2=='h'||ap3=='h'"></el-option>
+								<el-option label="风" value="f" :disabled="ap2=='f'||ap3=='f'"></el-option>
+								<el-option label="雷" value="l" :disabled="ap2=='l'||ap3=='l'"></el-option>
+								<el-option label="土" value="t" :disabled="ap2=='t'||ap3=='t'"></el-option>
 							</el-select>
 						</el-input>
 					</el-col>
 					<el-col :span="7">
-						<el-input v-model="va2" size="mini" type="number" :disabled="select1==1">
+						<el-input v-model="va2" size="mini" type="number" :disabled="select1==1" min="0" max="99">
 							<el-select v-model="ap2" slot="prepend" size="mini" placeholder="" :disabled="select1==1">
-								<el-option label="水" value="s" :disabled="ap1==1||ap3==1"></el-option>
-								<el-option label="火" value="h" :disabled="ap1==2||ap3==2"></el-option>
-								<el-option label="风" value="f" :disabled="ap1==3||ap3==3"></el-option>
-								<el-option label="雷" value="l" :disabled="ap1==4||ap3==4"></el-option>
-								<el-option label="土" value="t" :disabled="ap1==5||ap3==5"></el-option>
+								<el-option label="水" value="s" :disabled="ap1=='s'||ap3=='s'"></el-option>
+								<el-option label="火" value="h" :disabled="ap1=='h'||ap3=='h'"></el-option>
+								<el-option label="风" value="f" :disabled="ap1=='f'||ap3=='f'"></el-option>
+								<el-option label="雷" value="l" :disabled="ap1=='l'||ap3=='l'"></el-option>
+								<el-option label="土" value="t" :disabled="ap1=='t'||ap3=='t'"></el-option>
 							</el-select>
 						</el-input>
 					</el-col>
 					<el-col :span="7">
-						<el-input v-model="va3" size="mini" type="number" :disabled="select1!=5">
-							<el-select v-model="ap3" slot="prepend" size="mini" placeholder="" :disabled="select1!=4">
-								<el-option label="水" value="s" :disabled="ap1==1||ap2==1"></el-option>
-								<el-option label="火" value="h" :disabled="ap1==2||ap2==2"></el-option>
-								<el-option label="风" value="f" :disabled="ap1==3||ap2==3"></el-option>
-								<el-option label="雷" value="l" :disabled="ap1==4||ap2==4"></el-option>
-								<el-option label="土" value="t" :disabled="ap1==5||ap2==5"></el-option>
+						<el-input v-model="va3" size="mini" type="number" :disabled="select1!=5" min="0" max="99">
+							<el-select v-model="ap3" slot="prepend" size="mini" placeholder="" :disabled="select1!=5">
+								<el-option label="水" value="s" :disabled="ap1=='s'||ap2=='s'"></el-option>
+								<el-option label="火" value="h" :disabled="ap1=='h'||ap2=='h'"></el-option>
+								<el-option label="风" value="f" :disabled="ap1=='f'||ap2=='f'"></el-option>
+								<el-option label="雷" value="l" :disabled="ap1=='l'||ap2=='l'"></el-option>
+								<el-option label="土" value="t" :disabled="ap1=='t'||ap2=='t'"></el-option>
 							</el-select>
 						</el-input>
 					</el-col>
@@ -129,7 +132,7 @@
 					</el-col>
 					<el-col :span="21">
 						<div class="item-content">
-							{{select_ap}}
+							AP={{select_ap}}
 						</div>
 					</el-col>
 				</el-row>
@@ -137,7 +140,7 @@
 			<div class="item item-btn">
 				<el-row :gutter="3">
 					<el-col :span="24">
-						<el-button type="success" size="mini" round @click="count">计算魔法伤害</el-button>
+						<el-button type="primary" size="mini" round @click="count">计算魔法伤害</el-button>
 					</el-col>
 				</el-row>
 			</div>
@@ -148,7 +151,7 @@
 					</el-col>
 					<el-col :span="21">
 						<div class="item-content">
-							<span>{{pve}}</span>
+							{{pve}}
 						</div>
 					</el-col>
 				</el-row>
@@ -160,22 +163,13 @@
 					</el-col>
 					<el-col :span="21">
 						<div class="item-content">
-							<span>{{pvp}}</span>
+							{{pvp}}
 						</div>
 					</el-col>
 				</el-row>
 			</div>
-			<div class="item item-init">
-				<i class="el-icon-error"></i> 缺少数据 史诗-入门级符文石（紫）
-			</div>
-			<div class="item item-init">
-				<i class="el-icon-error"></i> 缺少数据 精良-大师级符文石（蓝）
-			</div>
-			<div class="item item-init">
-				<i class="el-icon-error"></i> 缺少数据 精良-博学者级符文石（蓝）
-			</div>
 			<div class="item item-bottom">
-				应用宝 和平服 130-256 黑白 V20210409
+				应用宝和平服 130&256 黑白 V-20210409
 			</div>
 		</div>
 		<script src="./index.js" type="text/javascript" charset="utf-8"></script>
