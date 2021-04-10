@@ -7,15 +7,16 @@
 	height: 40px;
 	line-height: 40px;
 	text-align: center;
+	font-size: 16px;
 	font-weight: 900;
-	color: #303133;
+	color: #0000CC;
 }
 
 .item {
 	float: left;
 	width: 98%;
 	margin-left: 1%;
-	margin-top: 10px;
+	margin-bottom: 10px;
 	height: 30px;
 	line-height: 30px;
 }
@@ -58,25 +59,17 @@
 	text-align: center;
 	font-size: 12px;
 	font-style: italic;
-	color: #409EFF;
+	color: #9933FF;
 }
 
 .item-btn .el-col {
 	text-align: center;
 }
 
-.item-pve .item-content span,
-.item-pvp .item-content span {
+.item-pve .item-content,
+.item-pvp .item-content {
 	color: #f00;
 	font-weight: 900;
-}
-
-.item-init {
-	font-size: 12px;
-	height: 20px;
-	line-height: 20px;
-	margin-top: 0px;
-	color: #F56C6C;
 }
 
 .item-bottom {
@@ -86,4 +79,13 @@
 	text-align: center;
 	font-size: 12px;
 	color: #888;
+	line-height: normal;
+}
+
+.item-info {
+	font-size: 12px;
+	color: #FF6666;
+	height: auto;
+	text-align: center;
+	line-height: normal;
 }
