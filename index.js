@@ -4,95 +4,95 @@ var app = new Vue({
 		select1: 1,
 		select2: "",
 		ap1: "s",
-		va1: "0",
+		va1: "",
 		ap2: "",
-		va2: "0",
+		va2: "",
 		ap3: "",
-		va3: "0",
+		va3: "",
 		select_lv: "0",
 		select_ap: "",
 		ap_list: [],
 		ap_lv0: [{
 				label: "符能灵箭",
-				value: "12+[n*0.5]+[h*0.25]+[f*0.25]+[t*0.25]"
+				value: "12+[n*50%]+[h*25%]+[f*25%]+[t*25%]"
 			},
 			{
 				label: "闪电震爆",
-				value: "6+[n*0.4]+[h*0.2]+[l*0.2]"
+				value: "6+[n*40%]+[h*20%]+[l*20%]"
 			},
 			{
 				label: "雷暴打击",
-				value: "20+[n*1]+[l*0.55]+[s*0.35]"
+				value: "20+[n*100%]+[l*55%]+[s*35%]"
 			}, {
 				label: "苍穹幻刃",
-				value: "22+[n*1.3]+[s*0.6]+[h*0.6]"
+				value: "22+[n*130%]+[s*60%]+[h*60%]"
 			}
 		],
 		ap_lv1: [{
-				label: "炽焰魔球",
-				value: "23+[n*1]+[h*1]"
+				label: "炽焰魔球（火火火）",
+				value: "23+[n*100%]+[h*100%]"
 			}, {
-				label: "强袭狂风",
-				value: "13+[n*0.5]+[f*0.5]"
+				label: "强袭狂风（风风风）",
+				value: "13+[n*50%]+[f*50%]"
 			},
 			{
-				label: "闪雷击",
-				value: "18+[n*0.8]+[l*0.8]"
+				label: "闪雷击（雷雷雷）",
+				value: "18+[n*80%]+[l*80%]"
 			},
 			{
-				label: "泡泡封印",
-				value: "15+[n*0.6]+[s*0.6]"
+				label: "泡泡封印（水水水）",
+				value: "15+[n*60%]+[s*60%]"
 			},
 			{
-				label: "岩石冲击",
-				value: "13+[n*0.5]+[t*0.5]"
+				label: "岩石冲击（土土土）",
+				value: "13+[n*50%]+[t*50%]"
 			}
 		],
 		ap_lv2: [{
-				label: "炽雷魔球",
-				value: "24+[n*1.05]+[h*0.8]+[l*0.4]"
+				label: "炽雷魔球（火火雷）",
+				value: "24+[n*105%]+[h*80%]+[l*40%]"
 			},
 			{
-				label: "狂澜季风",
-				value: "14+[n*0.6]+[s*0.2]+[f*0.4]"
+				label: "狂澜季风（风风水）",
+				value: "14+[n*60%]+[20%]+[f*40%]"
 			},
 			{
-				label: "砂尘飓风",
-				value: "8+[n*0.3]+[f*0.2]+[t*0.1]"
+				label: "砂尘飓风（风风土）",
+				value: "8+[n*30%]+[f*20%]+[t*10%]"
 			},
 			{
-				label: "火雷击",
-				value: "19+[n*0.9]+[l*0.55]+[h*0.35]"
+				label: "火雷击（雷雷火）",
+				value: "19+[n*90%]+[l*55%]+[h*35%]"
 			},
 			{
-				label: "符文灵箭",
-				value: "12+[n*0.5]+[f*0.25]+[t*0.25]"
+				label: "符文灵箭（火风雷土）",
+				value: "12+[n*50%]+[f*25%]+[t*25%]"
 			}
 		],
 		ap_lv3: [{
-				label: "炽砂魔球",
-				value: "26+[n*1.2]+[h*0.8]+[t*0.4]"
+				label: "炽砂魔球（火火土）",
+				value: "26+[n*120%]+[h*80%]+[t*40%]"
 			},
 			{
-				label: "雷雨击",
-				value: "20+[n*1]+[l*0.55]+[s*0.35]"
+				label: "雷雨击（雷雷水）",
+				value: "20+[n*100%]+[l*55%]+[s*35%]"
 			},
 			{
-				label: "雷霆审判",
-				value: "23+[n*1.1]+[l*0.7]+[f*0.4]"
+				label: "雷霆审判（雷雷风）",
+				value: "23+[n*110%]+[l*70%]+[f*40%]"
 			},
 			{
-				label: "烈焰燃烧",
-				value: "24+[n*1]+[h*0.8]+[f*0.4]"
+				label: "烈焰燃烧（火火风）",
+				value: "24+[n*100%]+[h*80%]+[f*40%]"
 			}
 		],
 		ap_lv4: [{
-				label: "毒素扩散",
-				value: "4+[n*0.3]+[s*0.2]+[l*0.2]"
+				label: "毒素扩散（水风雷雷）",
+				value: "4+[n*30%]+[s*20%]+[l*20%]"
 			},
 			{
-				label: "闪电震击",
-				value: "6+[n*0.4]+[h*0.2]+[l*0.2]"
+				label: "闪电震击（火火雷雷）",
+				value: "6+[n*40%]+[h*20%]+[l*20%]"
 			}
 		],
 		n: 0,
@@ -108,16 +108,16 @@ var app = new Vue({
 	methods: {
 		select1_change: function() {
 			this.ap1 = "s";
-			this.va1 = "0";
+			this.va1 = "";
 			if (this.select1 == 1) {
 				this.select2 = "";
 				this.ap2 = "";
-				this.va2 = "0";
+				this.va2 = "";
 				this.ap3 = "";
-				this.va3 = "0";
+				this.va3 = "";
 			} else {
 				this.ap2 = "h";
-				this.va2 = "0";
+				this.va2 = "";
 				if (this.select1 == 2) {
 					if (this.select2 != 1 || this.select2 != 2 || this.select2 != 3) {
 						this.select2 = 1;
@@ -127,10 +127,10 @@ var app = new Vue({
 				}
 				if (this.select1 == 5) {
 					this.ap3 = "f";
-					this.va3 = "0";
+					this.va3 = "";
 				} else {
 					this.ap3 = "";
-					this.va3 = "0";
+					this.va3 = "";
 				}
 			}
 		},
@@ -202,8 +202,10 @@ var app = new Vue({
 			str = str.replace(/f/g, this.f || 0);
 			str = str.replace(/l/g, this.l || 0);
 			str = str.replace(/t/g, this.t || 0);
+			str = str.replace(/%/g, "/100" || 0);
 			str = str.replace(/\[/g, "Math.floor(");
 			str = str.replace(/\]/g, ")");
+			console.log(str);
 			this.pve = eval(str);
 			this.pvp = Math.floor(this.pve * 0.7);
 		}
