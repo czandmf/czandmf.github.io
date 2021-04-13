@@ -9,9 +9,25 @@ var app = new Vue({
 		va2: "0",
 		ap3: "",
 		va3: "0",
-		select_lv: "1",
+		select_lv: "0",
 		select_ap: "",
 		ap_list: [],
+		ap_lv0: [{
+				label: "符能灵箭",
+				value: "12+[n*0.5]+[h*0.25]+[f*0.25]+[t*0.25]"
+			},
+			{
+				label: "闪电震爆",
+				value: "6+[n*0.4]+[h*0.2]+[l*0.2]"
+			},
+			{
+				label: "雷暴打击",
+				value: "20+[n*1]+[l*0.55]+[s*0.35]"
+			}, {
+				label: "苍穹幻刃",
+				value: "22+[n*1.3]+[s*0.6]+[h*0.6]"
+			}
+		],
 		ap_lv1: [{
 				label: "炽焰魔球（火火火）",
 				value: "23+[n*1]+[h*1]"
@@ -62,7 +78,7 @@ var app = new Vue({
 				value: "20+[n*1]+[l*0.55]+[s*0.35]"
 			},
 			{
-				label: "雷霆审判（电电风）",
+				label: "雷霆审判（雷雷风）",
 				value: "23+[n*1.1]+[l*0.7]+[f*0.4]"
 			},
 			{
@@ -70,21 +86,13 @@ var app = new Vue({
 				value: "24+[n*1]+[h*0.8]+[f*0.4]"
 			}
 		],
-		ap_lv4: [],
-		ap_lv5: [{
-				label: "符能灵箭",
-				value: "12+[n*0.5]+[h*0.25]+[f*0.25]+[t*0.25]"
+		ap_lv4: [{
+				label: "毒素扩散（水风雷雷）",
+				value: "4+[n*0.3]+[s*0.2]+[l*0.2]"
 			},
 			{
-				label: "闪电震爆",
+				label: "闪电震击（火火雷雷）",
 				value: "6+[n*0.4]+[h*0.2]+[l*0.2]"
-			},
-			{
-				label: "雷暴打击",
-				value: "20+[n*1]+[l*0.55]+[s*0.35]"
-			}, {
-				label: "苍穹幻刃",
-				value: "22+[n*1.3]+[s*0.6]+[h*0.6]"
 			}
 		],
 		n: 0,
@@ -115,7 +123,7 @@ var app = new Vue({
 						this.select2 = 1;
 					}
 				} else if (this.select2 == 1 || this.select2 == "") {
-					this.select2 = 2
+					this.select2 = 3
 				}
 				if (this.select1 == 5) {
 					this.ap3 = "f";
@@ -127,7 +135,9 @@ var app = new Vue({
 			}
 		},
 		select_lv_change: function() {
-			if (this.select_lv == 1) {
+			if (this.select_lv == 0) {
+				this.ap_list = this.ap_lv0;
+			} else if (this.select_lv == 1) {
 				this.ap_list = this.ap_lv1;
 			} else if (this.select_lv == 2) {
 				this.ap_list = this.ap_lv2;
@@ -135,8 +145,6 @@ var app = new Vue({
 				this.ap_list = this.ap_lv3;
 			} else if (this.select_lv == 4) {
 				this.ap_list = this.ap_lv4;
-			} else if (this.select_lv == 5) {
-				this.ap_list = this.ap_lv5;
 			}
 			this.select_ap = this.ap_list[0].value;
 		},
@@ -201,7 +209,7 @@ var app = new Vue({
 		}
 	},
 	created: function() {
-		this.ap_list = this.ap_lv1;
+		this.ap_list = this.ap_lv0;
 		this.select_ap = this.ap_list[0].value;
 	}
 });
