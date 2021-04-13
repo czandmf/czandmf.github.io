@@ -59,6 +59,7 @@
 					<el-col :span="7">
 						<el-input v-model="va1" size="mini" type="number">
 							<el-select v-model="ap1" slot="prepend" size="mini" placeholder="" min="0" max="99">
+								<el-option label="空" value="" v-show="false"></el-option>
 								<el-option label="水" value="s" :disabled="ap2=='s'||ap3=='s'"></el-option>
 								<el-option label="火" value="h" :disabled="ap2=='h'||ap3=='h'"></el-option>
 								<el-option label="风" value="f" :disabled="ap2=='f'||ap3=='f'"></el-option>
@@ -70,6 +71,7 @@
 					<el-col :span="7">
 						<el-input v-model="va2" size="mini" type="number" :disabled="select1==1" min="0" max="99">
 							<el-select v-model="ap2" slot="prepend" size="mini" placeholder="" :disabled="select1==1">
+								<el-option label="空" value="" v-show="false"></el-option>
 								<el-option label="水" value="s" :disabled="ap1=='s'||ap3=='s'"></el-option>
 								<el-option label="火" value="h" :disabled="ap1=='h'||ap3=='h'"></el-option>
 								<el-option label="风" value="f" :disabled="ap1=='f'||ap3=='f'"></el-option>
@@ -81,6 +83,7 @@
 					<el-col :span="7">
 						<el-input v-model="va3" size="mini" type="number" :disabled="select1!=5" min="0" max="99">
 							<el-select v-model="ap3" slot="prepend" size="mini" placeholder="" :disabled="select1!=5">
+								<el-option label="空" value="" v-show="false"></el-option>
 								<el-option label="水" value="s" :disabled="ap1=='s'||ap2=='s'"></el-option>
 								<el-option label="火" value="h" :disabled="ap1=='h'||ap2=='h'"></el-option>
 								<el-option label="风" value="f" :disabled="ap1=='f'||ap2=='f'"></el-option>
@@ -107,7 +110,7 @@
 					</el-col>
 					<el-col :span="14">
 						<el-select v-model="select_ap" size="mini">
-							<el-option v-for="item in ap_list" :key="item.value" :label="item.label" :value="item.value">
+							<el-option v-for="item in ap_list" :label="item.label" :value="item.value">
 							</el-option>
 						</el-select>
 					</el-col>
