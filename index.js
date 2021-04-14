@@ -150,41 +150,41 @@ var app = new Vue({
 		},
 		count: function() {
 			if (this.select1 == 1) {
-				this.n = 26; // 学徒级
+				this.n = 26;
 			} else if (this.select1 == 2) {
 				if (this.select2 == 1) {
-					this.n = 35; // 普通 入门
+					this.n = 35;
 				} else if (this.select2 == 2) {
-					this.n = 38; // 精良 入门
+					this.n = 38;
 				} else if (this.select2 == 3) {
-					this.n = 1; // 史诗 入门
+					this.n = 1;
 					return;
 				}
 			} else if (this.select1 == 3) {
 				if (this.select2 == 2) {
-					this.n = 1; // 精良 专家
+					this.n = 1;
 					return;
 				} else if (this.select2 == 3) {
-					this.n = 50; // 史诗 专家
+					this.n = 50;
 				} else if (this.select2 == 4) {
-					this.n = 53; // 传说 专家
+					this.n = 53;
 				}
 			} else if (this.select1 == 4) {
 				if (this.select2 == 2) {
-					this.n = 1; // 精良 大师
+					this.n = 1;
 					return;
 				} else if (this.select2 == 3) {
-					this.n = 58; // 史诗 大师
+					this.n = 58;
 				} else if (this.select2 == 4) {
-					this.n = 63; // 传说 大师
+					this.n = 63;
 				}
 			} else if (this.select1 == 5) {
 				if (this.select2 == 2) {
-					this.n = 48; // 精良 博学者
+					this.n = 48;
 				} else if (this.select2 == 3) {
-					this.n = 54; // 史诗 博学者
+					this.n = 54;
 				} else if (this.select2 == 4) {
-					this.n = 58; // 传说 博学者
+					this.n = 58;
 				}
 			}
 			this.s = 0;
@@ -205,7 +205,6 @@ var app = new Vue({
 			str = str.replace(/%/g, "/100" || 0);
 			str = str.replace(/\[/g, "Math.floor(");
 			str = str.replace(/\]/g, ")");
-			console.log(str);
 			this.pve = eval(str);
 			this.pvp = Math.floor(this.pve * 0.7);
 		}
