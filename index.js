@@ -162,8 +162,7 @@ var app = new Vue({
 				}
 			} else if (this.select1 == 3) {
 				if (this.select2 == 2) {
-					this.n = 1;
-					return;
+					this.n = 45;
 				} else if (this.select2 == 3) {
 					this.n = 50;
 				} else if (this.select2 == 4) {
@@ -171,8 +170,7 @@ var app = new Vue({
 				}
 			} else if (this.select1 == 4) {
 				if (this.select2 == 2) {
-					this.n = 1;
-					return;
+					this.n = 53;
 				} else if (this.select2 == 3) {
 					this.n = 58;
 				} else if (this.select2 == 4) {
@@ -205,6 +203,7 @@ var app = new Vue({
 			str = str.replace(/%/g, "/100" || 0);
 			str = str.replace(/\[/g, "Math.floor(");
 			str = str.replace(/\]/g, ")");
+			console.log(str);
 			this.pve = eval(str);
 			this.pvp = Math.floor(this.pve * 0.7);
 		}
