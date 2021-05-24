@@ -1,180 +1,483 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport"
-			content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<title>创造与魔法</title>
-		<link rel="stylesheet" type="text/css" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-		<link rel="stylesheet" type="text/css" href="./index.css">
-		<script type="text/javascript" charset="utf-8" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
-		<script type="text/javascript" charset="utf-8" src="https://unpkg.com/element-ui/lib/index.js"></script>
-	</head>
-	<body>
-		<div id="app">
-			<div class="app-title">
-				<marquee scrollamount="4">计算结果仅供参考 如有错误请发送邮件至2665006659@qq.com</marquee>
-			</div>
-			<div class="item item1">
-				<el-row :gutter="3">
-					<el-col :span="3">
-						<div class="item-title">装备</div>
-					</el-col>
-					<el-col :span="14">
-						<el-select v-model="select1" size="mini" @change="select1_change">
-							<el-option label="学徒级符文石" :value="1"></el-option>
-							<el-option label="入门级符文石" :value="2"></el-option>
-							<el-option label="专家级符文石" :value="3"></el-option>
-							<el-option label="大师级符文石" :value="4"></el-option>
-							<el-option label="博学者级符文石" :value="5"></el-option>
-						</el-select>
-					</el-col>
-					<el-col :span="7">
-						<el-select v-model="select2" size="mini" :disabled="select1==1" placeholder="">
-							<el-option label="普通" :value="1" v-show="select1==2">
-								<span style="color: limegreen;">普通</span>
-							</el-option>
-							<el-option label="精良" :value="2">
-								<span style="color: royalblue;">精良</span>
-							</el-option>
-							<el-option label="史诗" :value="3">
-								<span style="color: darkviolet;">史诗</span>
-							</el-option>
-							<el-option label="传说" :value="4" v-show="select1!=2">
-								<span style="color: darkorange;">传说</span>
-							</el-option>
-						</el-select>
-					</el-col>
-				</el-row>
-			</div>
-			<div class="item item-info" v-show="select1==2&&select2==3">
-				<i class="el-icon-error"></i> 缺少此品质的符文石数据，请选择其它品质
-			</div>
-			<div class="item item2">
-				<el-row :gutter="3">
-					<el-col :span="3">
-						<div class="item-title">属性</div>
-					</el-col>
-					<el-col :span="7">
-						<el-input v-model="va1" size="mini" type="number">
-							<el-select v-model="ap1" slot="prepend" size="mini" placeholder="" min="0" max="99">
-								<el-option label="空" value="" v-show="false"></el-option>
-								<el-option label="水" value="s" :disabled="ap2=='s'||ap3=='s'"></el-option>
-								<el-option label="火" value="h" :disabled="ap2=='h'||ap3=='h'"></el-option>
-								<el-option label="风" value="f" :disabled="ap2=='f'||ap3=='f'"></el-option>
-								<el-option label="雷" value="l" :disabled="ap2=='l'||ap3=='l'"></el-option>
-								<el-option label="土" value="t" :disabled="ap2=='t'||ap3=='t'"></el-option>
-							</el-select>
-						</el-input>
-					</el-col>
-					<el-col :span="7">
-						<el-input v-model="va2" size="mini" type="number" :disabled="select1==1" min="0" max="99">
-							<el-select v-model="ap2" slot="prepend" size="mini" placeholder="" :disabled="select1==1">
-								<el-option label="空" value="" v-show="false"></el-option>
-								<el-option label="水" value="s" :disabled="ap1=='s'||ap3=='s'"></el-option>
-								<el-option label="火" value="h" :disabled="ap1=='h'||ap3=='h'"></el-option>
-								<el-option label="风" value="f" :disabled="ap1=='f'||ap3=='f'"></el-option>
-								<el-option label="雷" value="l" :disabled="ap1=='l'||ap3=='l'"></el-option>
-								<el-option label="土" value="t" :disabled="ap1=='t'||ap3=='t'"></el-option>
-							</el-select>
-						</el-input>
-					</el-col>
-					<el-col :span="7">
-						<el-input v-model="va3" size="mini" type="number" :disabled="select1!=5" min="0" max="99">
-							<el-select v-model="ap3" slot="prepend" size="mini" placeholder="" :disabled="select1!=5">
-								<el-option label="空" value="" v-show="false"></el-option>
-								<el-option label="水" value="s" :disabled="ap1=='s'||ap2=='s'"></el-option>
-								<el-option label="火" value="h" :disabled="ap1=='h'||ap2=='h'"></el-option>
-								<el-option label="风" value="f" :disabled="ap1=='f'||ap2=='f'"></el-option>
-								<el-option label="雷" value="l" :disabled="ap1=='l'||ap2=='l'"></el-option>
-								<el-option label="土" value="t" :disabled="ap1=='t'||ap2=='t'"></el-option>
-							</el-select>
-						</el-input>
-					</el-col>
-				</el-row>
-			</div>
-			<div class="item item3">
-				<el-row :gutter="3">
-					<el-col :span="3">
-						<div class="item-title">魔法</div>
-					</el-col>
-					<el-col :span="7">
-						<el-select v-model="select_lv" size="mini" @change="select_lv_change">
-							<el-option label="卷轴魔法" value="0"></el-option>
-							<el-option label="一级魔法" value="1"></el-option>
-							<el-option label="二级魔法" value="2"></el-option>
-							<el-option label="三级魔法" value="3"></el-option>
-							<el-option label="四级魔法" value="4"></el-option>
-						</el-select>
-					</el-col>
-					<el-col :span="14">
-						<el-select v-model="select_ap" size="mini">
-							<el-option v-for="item in ap_list" :label="item.label" :value="item.value">
-							</el-option>
-						</el-select>
-					</el-col>
-				</el-row>
-			</div>
-			<div class="item item4">
-				<el-row :gutter="3">
-					<el-col :span="3">
-						<div class="item-title">公式</div>
-					</el-col>
-					<el-col :span="21">
-						<div class="item-content">
-							AP=m+[n*a%]+[x*b%]+[y*c%]+[z*d%]
-						</div>
-					</el-col>
-				</el-row>
-			</div>
-			<div class="item item5">
-				<el-row :gutter="3">
-					<el-col :span="3">
-						<div class="item-title">算式</div>
-					</el-col>
-					<el-col :span="21">
-						<div class="item-content">
-							AP={{select_ap}}
-						</div>
-					</el-col>
-				</el-row>
-			</div>
-			<div class="item item-btn">
-				<el-row :gutter="3">
-					<el-col :span="24">
-						<el-button type="primary" size="mini" round @click="count">计算魔法伤害</el-button>
-					</el-col>
-				</el-row>
-			</div>
-			<div class="item item-pve">
-				<el-row :gutter="3">
-					<el-col :span="3">
-						<div class="item-title">PVE</div>
-					</el-col>
-					<el-col :span="21">
-						<div class="item-content">
-							{{pve}}
-						</div>
-					</el-col>
-				</el-row>
-			</div>
-			<div class="item item-pvp">
-				<el-row :gutter="3">
-					<el-col :span="3">
-						<div class="item-title">PVP</div>
-					</el-col>
-					<el-col :span="21">
-						<div class="item-content">
-							{{pvp}}
-						</div>
-					</el-col>
-				</el-row>
-			</div>
-			<div class="item item-bottom">
-				应用宝和平服 130&256 黑白 V210413
-			</div>
-		</div>
-		<script src="./index.js" type="text/javascript" charset="utf-8"></script>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+      content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>创造与魔法</title>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .app-title {
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 900;
+        color: #0000CC;
+      }
+
+      .item {
+        float: left;
+        width: 98%;
+        margin-left: 1%;
+        margin-bottom: 10px;
+        height: 30px;
+        line-height: 30px;
+      }
+
+      .el-row {
+        width: 100%;
+        height: 100%;
+      }
+
+      .item-title {
+        font-size: 14px;
+        text-align: center;
+        color: #303133;
+        font-weight: 900;
+      }
+
+      .item1 .el-select,
+      .item2 .el-input,
+      .item3 .el-select {
+        float: left;
+        width: 100%;
+      }
+
+      .item2 .el-input .el-input__suffix {
+        display: none;
+      }
+
+      .input-with-select .el-input-group__prepend {
+        background-color: #fff;
+      }
+
+      .item2 .el-input__inner {
+        width: 100%;
+        text-align: center;
+        padding: 0;
+      }
+
+      .item4 .item-content,
+      .item5 .item-content {
+        text-align: center;
+        font-size: 12px;
+        font-style: italic;
+        color: #9933FF;
+      }
+
+      .item-btn .el-col {
+        text-align: center;
+      }
+
+      .item-pve .item-content,
+      .item-pvp .item-content {
+        color: #f00;
+        font-weight: 900;
+      }
+
+      .item-bottom {
+        position: absolute;
+        bottom: 5px;
+        height: auto;
+        text-align: center;
+        font-size: 12px;
+        color: #888;
+        line-height: normal;
+      }
+
+      .item-info {
+        font-size: 12px;
+        color: #FF6666;
+        height: auto;
+        text-align: center;
+        line-height: normal;
+      }
+    </style>
+    <script type="text/javascript" charset="utf-8" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="https://unpkg.com/element-ui/lib/index.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="app-title">
+        <marquee scrollamount="4">计算结果仅供参考 如有错误请发送邮件至2665006659@qq.com</marquee>
+      </div>
+      <div class="item item1">
+        <el-row :gutter="3">
+          <el-col :span="3">
+            <div class="item-title">装备</div>
+          </el-col>
+          <el-col :span="14">
+            <el-select v-model="select1" size="mini" @change="select1_change">
+              <el-option label="学徒级符文石" :value="1"></el-option>
+              <el-option label="入门级符文石" :value="2"></el-option>
+              <el-option label="专家级符文石" :value="3"></el-option>
+              <el-option label="大师级符文石" :value="4"></el-option>
+              <el-option label="博学者级符文石" :value="5"></el-option>
+            </el-select>
+          </el-col>
+          <el-col :span="7">
+            <el-select v-model="select2" size="mini" :disabled="select1==1" placeholder="">
+              <el-option label="普通" :value="1" v-show="select1==2">
+                <span style="color: limegreen;">普通</span>
+              </el-option>
+              <el-option label="精良" :value="2">
+                <span style="color: royalblue;">精良</span>
+              </el-option>
+              <el-option label="史诗" :value="3">
+                <span style="color: darkviolet;">史诗</span>
+              </el-option>
+              <el-option label="传说" :value="4" v-show="select1!=2">
+                <span style="color: darkorange;">传说</span>
+              </el-option>
+            </el-select>
+          </el-col>
+        </el-row>
+      </div>
+      <div class="item item2">
+        <el-row :gutter="3">
+          <el-col :span="3">
+            <div class="item-title">属性</div>
+          </el-col>
+          <el-col :span="7">
+            <el-input v-model="va1" size="mini" type="number">
+              <el-select v-model="ap1" slot="prepend" size="mini" placeholder="" min="0" max="99">
+                <el-option label="空" value="" v-show="false"></el-option>
+                <el-option label="水" value="s" :disabled="ap2=='s'||ap3=='s'"></el-option>
+                <el-option label="火" value="h" :disabled="ap2=='h'||ap3=='h'"></el-option>
+                <el-option label="风" value="f" :disabled="ap2=='f'||ap3=='f'"></el-option>
+                <el-option label="雷" value="l" :disabled="ap2=='l'||ap3=='l'"></el-option>
+                <el-option label="土" value="t" :disabled="ap2=='t'||ap3=='t'"></el-option>
+              </el-select>
+            </el-input>
+          </el-col>
+          <el-col :span="7">
+            <el-input v-model="va2" size="mini" type="number" :disabled="select1==1" min="0" max="99">
+              <el-select v-model="ap2" slot="prepend" size="mini" placeholder="" :disabled="select1==1">
+                <el-option label="空" value="" v-show="false"></el-option>
+                <el-option label="水" value="s" :disabled="ap1=='s'||ap3=='s'"></el-option>
+                <el-option label="火" value="h" :disabled="ap1=='h'||ap3=='h'"></el-option>
+                <el-option label="风" value="f" :disabled="ap1=='f'||ap3=='f'"></el-option>
+                <el-option label="雷" value="l" :disabled="ap1=='l'||ap3=='l'"></el-option>
+                <el-option label="土" value="t" :disabled="ap1=='t'||ap3=='t'"></el-option>
+              </el-select>
+            </el-input>
+          </el-col>
+          <el-col :span="7">
+            <el-input v-model="va3" size="mini" type="number" :disabled="select1!=5" min="0" max="99">
+              <el-select v-model="ap3" slot="prepend" size="mini" placeholder="" :disabled="select1!=5">
+                <el-option label="空" value="" v-show="false"></el-option>
+                <el-option label="水" value="s" :disabled="ap1=='s'||ap2=='s'"></el-option>
+                <el-option label="火" value="h" :disabled="ap1=='h'||ap2=='h'"></el-option>
+                <el-option label="风" value="f" :disabled="ap1=='f'||ap2=='f'"></el-option>
+                <el-option label="雷" value="l" :disabled="ap1=='l'||ap2=='l'"></el-option>
+                <el-option label="土" value="t" :disabled="ap1=='t'||ap2=='t'"></el-option>
+              </el-select>
+            </el-input>
+          </el-col>
+        </el-row>
+      </div>
+      <div class="item item3">
+        <el-row :gutter="3">
+          <el-col :span="3">
+            <div class="item-title">魔法</div>
+          </el-col>
+          <el-col :span="7">
+            <el-select v-model="select_lv" size="mini" @change="select_lv_change">
+              <el-option label="卷轴魔法" value="0"></el-option>
+              <el-option label="一级魔法" value="1"></el-option>
+              <el-option label="二级魔法" value="2"></el-option>
+              <el-option label="三级魔法" value="3"></el-option>
+              <el-option label="四级魔法" value="4"></el-option>
+            </el-select>
+          </el-col>
+          <el-col :span="14">
+            <el-select v-model="select_ap" size="mini">
+              <el-option v-for="item in ap_list" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
+          </el-col>
+        </el-row>
+      </div>
+      <div class="item item4">
+        <el-row :gutter="3">
+          <el-col :span="3">
+            <div class="item-title">公式</div>
+          </el-col>
+          <el-col :span="21">
+            <div class="item-content">
+              AP=m+[n*a%]+[x*b%]+[y*c%]+[z*d%]
+            </div>
+          </el-col>
+        </el-row>
+      </div>
+      <div class="item item5">
+        <el-row :gutter="3">
+          <el-col :span="3">
+            <div class="item-title">算式</div>
+          </el-col>
+          <el-col :span="21">
+            <div class="item-content">
+              AP={{select_ap}}
+            </div>
+          </el-col>
+        </el-row>
+      </div>
+      <div class="item item-btn">
+        <el-row :gutter="3">
+          <el-col :span="24">
+            <el-button type="primary" size="mini" round @click="count">计算魔法伤害</el-button>
+          </el-col>
+        </el-row>
+      </div>
+      <div class="item item-pve">
+        <el-row :gutter="3">
+          <el-col :span="3">
+            <div class="item-title">PVE</div>
+          </el-col>
+          <el-col :span="21">
+            <div class="item-content">
+              {{pve}}
+            </div>
+          </el-col>
+        </el-row>
+      </div>
+      <div class="item item-pvp">
+        <el-row :gutter="3">
+          <el-col :span="3">
+            <div class="item-title">PVP</div>
+          </el-col>
+          <el-col :span="21">
+            <div class="item-content">
+              {{pvp}}
+            </div>
+          </el-col>
+        </el-row>
+      </div>
+      <div class="item item-bottom">
+        应用宝和平服 130&256 黑白 V-20210524
+      </div>
+    </div>
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          select1: 1,
+          select2: "",
+          ap1: "s",
+          va1: "",
+          ap2: "",
+          va2: "",
+          ap3: "",
+          va3: "",
+          select_lv: "0",
+          select_ap: "",
+          ap_list: [],
+          ap_lv0: [{
+              label: "符能灵箭",
+              value: "12+[n*50%]+[h*25%]+[f*25%]+[t*25%]"
+            },
+            {
+              label: "闪电震爆",
+              value: "6+[n*40%]+[h*20%]+[l*20%]"
+            },
+            {
+              label: "雷暴打击",
+              value: "20+[n*100%]+[l*55%]+[s*35%]"
+            }, {
+              label: "苍穹幻刃",
+              value: "22+[n*130%]+[s*60%]+[h*60%]"
+            }
+          ],
+          ap_lv1: [{
+              label: "炽焰魔球（火火火）",
+              value: "23+[n*100%]+[h*100%]"
+            }, {
+              label: "强袭狂风（风风风）",
+              value: "13+[n*50%]+[f*50%]"
+            },
+            {
+              label: "闪雷击（雷雷雷）",
+              value: "18+[n*80%]+[l*80%]"
+            },
+            {
+              label: "泡泡封印（水水水）",
+              value: "15+[n*60%]+[s*60%]"
+            },
+            {
+              label: "岩石冲击（土土土）",
+              value: "13+[n*50%]+[t*50%]"
+            }
+          ],
+          ap_lv2: [{
+              label: "炽雷魔球（火火雷）",
+              value: "24+[n*105%]+[h*80%]+[l*40%]"
+            },
+            {
+              label: "狂澜季风（风风水）",
+              value: "14+[n*60%]+[20%]+[f*40%]"
+            },
+            {
+              label: "砂尘飓风（风风土）",
+              value: "8+[n*30%]+[f*20%]+[t*10%]"
+            },
+            {
+              label: "火雷击（雷雷火）",
+              value: "19+[n*90%]+[l*55%]+[h*35%]"
+            },
+            {
+              label: "符文灵箭（火风雷土）",
+              value: "12+[n*50%]+[f*25%]+[t*25%]"
+            }
+          ],
+          ap_lv3: [{
+              label: "炽砂魔球（火火土）",
+              value: "26+[n*120%]+[h*80%]+[t*40%]"
+            },
+            {
+              label: "雷雨击（雷雷水）",
+              value: "20+[n*100%]+[l*55%]+[s*35%]"
+            },
+            {
+              label: "雷霆审判（雷雷风）",
+              value: "23+[n*110%]+[l*70%]+[f*40%]"
+            },
+            {
+              label: "烈焰燃烧（火火风）",
+              value: "24+[n*100%]+[h*80%]+[f*40%]"
+            }
+          ],
+          ap_lv4: [{
+              label: "毒素扩散（水风雷雷）",
+              value: "4+[n*30%]+[s*20%]+[l*20%]"
+            },
+            {
+              label: "闪电震击（火火雷雷）",
+              value: "6+[n*40%]+[h*20%]+[l*20%]"
+            }
+          ],
+          n: 0,
+          s: 0,
+          h: 0,
+          f: 0,
+          l: 0,
+          t: 0,
+          pve: "0",
+          pvp: "0",
+          count_str: ""
+        },
+        methods: {
+          select1_change: function() {
+            this.ap1 = "s";
+            this.va1 = "";
+            if (this.select1 == 1) {
+              this.select2 = "";
+              this.ap2 = "";
+              this.va2 = "";
+              this.ap3 = "";
+              this.va3 = "";
+            } else {
+              this.ap2 = "h";
+              this.va2 = "";
+              if (this.select1 == 2) {
+                if (this.select2 != 1 || this.select2 != 2 || this.select2 != 3) {
+                  this.select2 = 1;
+                }
+              } else if (this.select2 == 1 || this.select2 == "") {
+                this.select2 = 3
+              }
+              if (this.select1 == 5) {
+                this.ap3 = "f";
+                this.va3 = "";
+              } else {
+                this.ap3 = "";
+                this.va3 = "";
+              }
+            }
+          },
+          select_lv_change: function() {
+            if (this.select_lv == 0) {
+              this.ap_list = this.ap_lv0;
+            } else if (this.select_lv == 1) {
+              this.ap_list = this.ap_lv1;
+            } else if (this.select_lv == 2) {
+              this.ap_list = this.ap_lv2;
+            } else if (this.select_lv == 3) {
+              this.ap_list = this.ap_lv3;
+            } else if (this.select_lv == 4) {
+              this.ap_list = this.ap_lv4;
+            }
+            this.select_ap = this.ap_list[0].value;
+          },
+          count: function() {
+            if (this.select1 == 1) {
+              this.n = 26;
+            } else if (this.select1 == 2) {
+              if (this.select2 == 1) {
+                this.n = 35;
+              } else if (this.select2 == 2) {
+                this.n = 38;
+              } else if (this.select2 == 3) {
+                this.n = 40;
+              }
+            } else if (this.select1 == 3) {
+              if (this.select2 == 2) {
+                this.n = 45;
+              } else if (this.select2 == 3) {
+                this.n = 50;
+              } else if (this.select2 == 4) {
+                this.n = 53;
+              }
+            } else if (this.select1 == 4) {
+              if (this.select2 == 2) {
+                this.n = 53;
+              } else if (this.select2 == 3) {
+                this.n = 58;
+              } else if (this.select2 == 4) {
+                this.n = 63;
+              }
+            } else if (this.select1 == 5) {
+              if (this.select2 == 2) {
+                this.n = 48;
+              } else if (this.select2 == 3) {
+                this.n = 54;
+              } else if (this.select2 == 4) {
+                this.n = 58;
+              }
+            }
+            this.s = 0;
+            this.h = 0;
+            this.f = 0;
+            this.l = 0;
+            this.t = 0;
+            this[this.ap1] = this.va1 * 1;
+            this[this.ap2] = this.va2 * 1;
+            this[this.ap3] = this.va3 * 1;
+            var str = this.select_ap;
+            str = str.replace(/n/g, this.n || 0);
+            str = str.replace(/s/g, this.s || 0);
+            str = str.replace(/h/g, this.h || 0);
+            str = str.replace(/f/g, this.f || 0);
+            str = str.replace(/l/g, this.l || 0);
+            str = str.replace(/t/g, this.t || 0);
+            str = str.replace(/%/g, "/100" || 0);
+            str = str.replace(/\[/g, "Math.floor(");
+            str = str.replace(/\]/g, ")");
+            this.pve = eval(str);
+            this.pvp = Math.floor(this.pve * 0.7);
+          }
+        },
+        created: function() {
+          this.ap_list = this.ap_lv0;
+          this.select_ap = this.ap_list[0].value;
+        }
+      });
+    </script>
+  </body>
 </html>
